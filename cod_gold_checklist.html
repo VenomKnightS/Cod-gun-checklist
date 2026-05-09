@@ -3,95 +3,73 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>COD Mobile – Gold &amp; Diamond</title>
+<title>COD Mobile – Gold & Diamond</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap');
-  :root {
-    --bg:#0a0c10;--panel:#111520;--border:#1e2535;
-    --gold:#d4a017;--gold2:#f5c842;
-    --diamond:#7ee8fa;--diamond2:#a8f0ff;
-    --next:#ff8c00;--next2:#ffb347;
-    --red:#ff3a3a;--text:#c8d0e0;--dim:#5a6480;
-    --editor-color:#c084fc;--user-color:#4ade80;
-    --primary-color:#60a5fa;--secondary-color:#f472b6;
-  }
+  :root{--bg:#0a0c10;--panel:#111520;--border:#1e2535;--gold:#d4a017;--gold2:#f5c842;--diamond:#7ee8fa;--diamond2:#a8f0ff;--next:#ff8c00;--next2:#ffb347;--red:#ff3a3a;--text:#c8d0e0;--dim:#5a6480;--ec:#c084fc;--uc:#4ade80;--pc:#60a5fa;--sc:#f472b6;}
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;padding-bottom:60px;}
-
-  /* TOP BAR */
   #topbar{position:sticky;top:0;z-index:100;background:#0d0f18;border-bottom:2px solid var(--gold);display:flex;align-items:center;justify-content:space-between;padding:0 12px;height:52px;gap:8px;}
   #topbar h1{font-size:1rem;font-weight:700;letter-spacing:2px;color:var(--gold2);text-transform:uppercase;white-space:nowrap;flex:1;}
   .icon-btn{background:var(--panel);border:1px solid var(--border);color:var(--gold);border-radius:6px;padding:6px 10px;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;text-decoration:none;flex-shrink:0;}
   .icon-btn:active{background:#1a2030;}
-
-  /* MODE BAR */
   #mode-bar{background:#0d0f18;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:center;padding:8px 14px;gap:10px;}
   #mode-label{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--dim);letter-spacing:1px;}
   #mode-toggle{display:flex;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
   .mode-btn{padding:6px 16px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:1px;cursor:pointer;border:none;background:var(--panel);color:var(--dim);transition:background .15s,color .15s;text-transform:uppercase;}
-  .mode-btn.active.user{background:var(--user-color);color:#000;}
-  .mode-btn.active.editor{background:var(--editor-color);color:#000;}
-
-  /* UP NEXT SECTION */
+  .mode-btn.active.user{background:var(--uc);color:#000;}
+  .mode-btn.active.editor{background:var(--ec);color:#000;}
   #upnext-section{margin:10px 10px 0;border:1px solid var(--next);border-radius:10px;overflow:hidden;}
   #upnext-header{background:#1a1200;padding:8px 12px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
   #upnext-title{font-size:.85rem;font-weight:700;letter-spacing:2px;color:var(--next2);text-transform:uppercase;flex:1;}
-  .upnext-control{display:flex;align-items:center;gap:6px;font-size:.72rem;font-family:'Share Tech Mono',monospace;}
-  .toggle-check{width:16px;height:16px;border-radius:3px;border:2px solid var(--dim);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,border-color .15s;}
-  .toggle-check.on{background:var(--next);border-color:var(--next);}
-  .toggle-check svg{display:none;}
-  .toggle-check.on svg{display:block;}
+  .upnext-ctrl{display:flex;align-items:center;gap:6px;font-size:.72rem;font-family:'Share Tech Mono',monospace;}
+  .tog{width:16px;height:16px;border-radius:3px;border:2px solid var(--dim);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s,border-color .15s;}
+  .tog.on{background:var(--next);border-color:var(--next);}
+  .tog svg{display:none;}
+  .tog.on svg{display:block;}
   #dual-label{color:var(--dim);cursor:pointer;}
   #dual-label.on{color:var(--next2);}
-  #showlist-btn{background:transparent;border:1px solid var(--dim);color:var(--dim);border-radius:5px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.68rem;padding:3px 8px;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;}
+  #showlist-btn{background:transparent;border:1px solid var(--dim);color:var(--dim);border-radius:5px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.68rem;padding:3px 8px;cursor:pointer;text-transform:uppercase;}
   #showlist-btn.on{border-color:var(--next);color:var(--next);}
-
   #upnext-body{background:#0f1108;padding:10px;}
   #upnext-empty{font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--dim);text-align:center;padding:10px 0;}
-
-  /* QUEUE DISPLAY */
-  .queue-section{margin-bottom:10px;}
-  .queue-section:last-child{margin-bottom:0;}
-  .queue-label{font-size:.65rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid var(--border);}
-  .queue-label.primary-label{color:var(--primary-color);}
-  .queue-label.secondary-label{color:var(--secondary-color);}
-  .queue-label.simple-label{color:var(--next);}
-
-  /* ACTIVE GUN CARD */
-  .gun-card{background:#141824;border:1px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px;position:relative;}
-  .gun-card.primary-card{border-left:3px solid var(--primary-color);}
-  .gun-card.secondary-card{border-left:3px solid var(--secondary-color);}
-  .gun-card.simple-card{border-left:3px solid var(--next);}
-  .gun-card-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
-  .gun-card-num{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);flex-shrink:0;}
-  .gun-card-name{font-size:1rem;font-weight:700;letter-spacing:1px;flex:1;color:var(--text);}
-  .gun-card-cat{font-size:.65rem;font-family:'Share Tech Mono',monospace;color:var(--dim);}
-  .gun-card-remove{background:transparent;border:none;color:#2a3040;font-size:.9rem;cursor:pointer;padding:2px 4px;border-radius:3px;transition:color .15s;flex-shrink:0;}
-  .gun-card-remove:active{color:var(--red);}
-  .gun-card-goals{display:flex;gap:8px;align-items:center;}
-  .goal-check-wrap{display:flex;align-items:center;gap:5px;cursor:pointer;}
-  .goal-cb{width:22px;height:22px;border-radius:4px;border:2px solid var(--dim);background:transparent;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;flex-shrink:0;}
-  .goal-cb.gold-cb.checked{background:var(--gold);border-color:var(--gold);}
-  .goal-cb.diam-cb.checked{background:var(--diamond);border-color:var(--diamond);}
-  .goal-cb svg{display:none;}
-  .goal-cb.gold-cb.checked svg{display:block;}
-  .diam-icon{width:11px;height:11px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);display:none;}
-  .goal-cb.diam-cb.checked .diam-icon{display:block;}
-  .goal-label{font-size:.75rem;font-family:'Share Tech Mono',monospace;}
-  .goal-label.gold-lbl{color:var(--gold);}
-  .goal-label.diam-lbl{color:var(--diamond);}
-  .goal-label.done{text-decoration:line-through;opacity:.5;}
-
-  /* QUEUE LIST (show all) */
-  .queue-list-item{display:flex;align-items:center;padding:5px 8px;border-bottom:1px solid var(--border);gap:8px;font-size:.82rem;}
-  .queue-list-item:last-child{border-bottom:none;}
-  .queue-pos{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);width:18px;flex-shrink:0;}
-  .queue-item-name{flex:1;}
-  .queue-item-goals{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);}
-  .queue-item-remove{background:transparent;border:none;color:#2a3040;font-size:.85rem;cursor:pointer;padding:2px 4px;transition:color .15s;}
-  .queue-item-remove:active{color:var(--red);}
-
-  /* PROGRESS */
+  .qsec{margin-bottom:10px;}
+  .qsec:last-child{margin-bottom:0;}
+  .qlbl{font-size:.65rem;font-family:'Share Tech Mono',monospace;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;padding-bottom:3px;border-bottom:1px solid var(--border);}
+  .qlbl.pl{color:var(--pc);}
+  .qlbl.sl{color:var(--sc);}
+  .qlbl.nl{color:var(--next);}
+  .cards-wrap{display:flex;gap:8px;}
+  .gun-card{background:#141824;border:1px solid var(--border);border-radius:8px;padding:10px 12px;flex:1;}
+  .gun-card.pc{border-left:3px solid var(--pc);}
+  .gun-card.sc{border-left:3px solid var(--sc);}
+  .gun-card.nc{border-left:3px solid var(--next);}
+  .card-top{display:flex;align-items:center;gap:6px;margin-bottom:8px;}
+  .card-num{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);flex-shrink:0;}
+  .card-name{font-size:.95rem;font-weight:700;flex:1;color:var(--text);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .card-cat{font-size:.6rem;font-family:'Share Tech Mono',monospace;color:var(--dim);white-space:nowrap;}
+  .card-rm{background:transparent;border:none;color:#2a3040;font-size:.9rem;cursor:pointer;padding:2px 4px;border-radius:3px;transition:color .15s;flex-shrink:0;}
+  .card-rm:active{color:var(--red);}
+  .card-goals{display:flex;gap:8px;align-items:center;}
+  .gcw{display:flex;align-items:center;gap:5px;cursor:pointer;}
+  .gcb{width:22px;height:22px;border-radius:4px;border:2px solid var(--dim);background:transparent;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;flex-shrink:0;}
+  .gcb.g.checked{background:var(--gold);border-color:var(--gold);}
+  .gcb.d.checked{background:var(--diamond);border-color:var(--diamond);}
+  .gcb svg{display:none;}
+  .gcb.g.checked svg{display:block;}
+  .cdi{width:11px;height:11px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);display:none;}
+  .gcb.d.checked .cdi{display:block;}
+  .glbl{font-size:.75rem;font-family:'Share Tech Mono',monospace;}
+  .glbl.g{color:var(--gold);}
+  .glbl.d{color:var(--diamond);}
+  .glbl.done{text-decoration:line-through;opacity:.5;}
+  .qrow{display:flex;align-items:center;padding:5px 8px;border-bottom:1px solid var(--border);gap:8px;font-size:.82rem;}
+  .qrow:last-child{border-bottom:none;}
+  .qpos{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);width:18px;flex-shrink:0;}
+  .qname{flex:1;}
+  .qgoal{font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--dim);}
+  .qrm{background:transparent;border:none;color:#2a3040;font-size:.85rem;cursor:pointer;padding:2px 4px;transition:color .15s;}
+  .qrm:active{color:var(--red);}
   #progress-wrap{background:#0d0f18;padding:8px 14px 10px;border-bottom:1px solid var(--border);}
   .prog-row{margin-bottom:6px;}
   .prog-row:last-child{margin-bottom:0;}
@@ -101,125 +79,108 @@
   #next-bar{background:linear-gradient(90deg,var(--next),var(--next2));}
   #gold-bar{background:linear-gradient(90deg,var(--gold),var(--gold2));}
   #diam-bar{background:linear-gradient(90deg,#4fc3f7,var(--diamond2));}
-  .gold-label{color:var(--gold);}
-  .diam-label{color:var(--diamond);}
-  .next-label{color:var(--next);}
-
-  /* LEGEND */
+  .gl{color:var(--gold);}
+  .dl{color:var(--diamond);}
+  .nl{color:var(--next);}
   #legend{display:flex;gap:12px;padding:5px 14px;background:#0d0f18;border-bottom:1px solid var(--border);font-size:.68rem;font-family:'Share Tech Mono',monospace;align-items:center;flex-wrap:wrap;}
-  .legend-item{display:flex;align-items:center;gap:4px;}
-  .legend-box{width:13px;height:13px;border-radius:3px;display:flex;align-items:center;justify-content:center;}
-  .legend-box.n{background:var(--next);}
-  .legend-box.g{background:var(--gold);}
-  .legend-box.d{background:var(--diamond);}
-  .legend-diam{width:8px;height:8px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);}
-
-  /* SETTINGS */
+  .li{display:flex;align-items:center;gap:4px;}
+  .lb{width:13px;height:13px;border-radius:3px;display:flex;align-items:center;justify-content:center;}
+  .lb.n{background:var(--next);}
+  .lb.g{background:var(--gold);}
+  .lb.d{background:var(--diamond);}
+  .ld{width:8px;height:8px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);}
   #settings-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto;}
   #settings-overlay.show{display:flex;}
   #settings-panel{background:#141824;border:1px solid var(--gold);border-radius:12px;padding:20px 16px;width:100%;max-width:380px;margin-top:10px;}
   #settings-panel h2{font-size:1rem;letter-spacing:2px;color:var(--gold2);text-transform:uppercase;margin-bottom:16px;}
-  .settings-section{margin-bottom:18px;}
-  .settings-section h3{font-size:.78rem;letter-spacing:1px;color:var(--dim);text-transform:uppercase;margin-bottom:8px;font-family:'Share Tech Mono',monospace;border-bottom:1px solid var(--border);padding-bottom:4px;}
-  .settings-input{width:100%;background:#1a1f2e;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 10px;font-family:'Share Tech Mono',monospace;font-size:.78rem;outline:none;margin-bottom:8px;}
-  .settings-input:focus{border-color:var(--gold);}
-  .settings-input::placeholder{color:var(--dim);}
-  .settings-note{font-size:.72rem;color:var(--dim);line-height:1.4;margin-bottom:8px;font-family:'Share Tech Mono',monospace;}
-  .settings-btn{width:100%;padding:10px;border-radius:6px;border:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:1px;cursor:pointer;text-transform:uppercase;margin-bottom:8px;}
-  .settings-btn.save{background:var(--gold);color:#000;}
-  .settings-btn.danger{background:transparent;border:1px solid var(--red);color:var(--red);}
-  .settings-btn.close-btn{background:var(--panel);color:var(--text);border:1px solid var(--border);}
+  .ss{margin-bottom:18px;}
+  .ss h3{font-size:.78rem;letter-spacing:1px;color:var(--dim);text-transform:uppercase;margin-bottom:8px;font-family:'Share Tech Mono',monospace;border-bottom:1px solid var(--border);padding-bottom:4px;}
+  .si{width:100%;background:#1a1f2e;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 10px;font-family:'Share Tech Mono',monospace;font-size:.78rem;outline:none;margin-bottom:8px;}
+  .si:focus{border-color:var(--gold);}
+  .si::placeholder{color:var(--dim);}
+  .sn{font-size:.72rem;color:var(--dim);line-height:1.4;margin-bottom:8px;font-family:'Share Tech Mono',monospace;}
+  .sbtn{width:100%;padding:10px;border-radius:6px;border:none;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;letter-spacing:1px;cursor:pointer;text-transform:uppercase;margin-bottom:8px;}
+  .sbtn.save{background:var(--gold);color:#000;}
+  .sbtn.danger{background:transparent;border:1px solid var(--red);color:var(--red);}
+  .sbtn.close{background:var(--panel);color:var(--text);border:1px solid var(--border);}
   #api-status{font-size:.72rem;font-family:'Share Tech Mono',monospace;margin-bottom:8px;}
-
-  /* CATEGORIES */
   .category{margin:10px 10px 0;border-radius:8px;overflow:hidden;border:1px solid var(--border);}
-  .cat-header{display:flex;align-items:center;background:#141824;padding:0 8px;min-height:54px;gap:6px;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:background .15s;}
-  .cat-header:active{background:#1a2030;}
-  .cat-header.open{border-bottom-color:var(--border);}
-  .cat-cb-group{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;}
-  .cat-cb-label{font-size:.52rem;letter-spacing:.5px;font-weight:700;text-transform:uppercase;line-height:1;}
-  .cat-cb-label.gold-label{color:var(--gold);}
-  .cat-cb-label.diam-label{color:var(--diamond);}
-  .cat-cb-label.next-label{color:var(--next);}
-  .diam-label-icon{width:10px;height:10px;background:var(--diamond);clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);}
-  .cat-check{width:20px;height:20px;border-radius:4px;border:2px solid var(--gold);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;z-index:2;}
-  .cat-check.checked{background:var(--gold);}
-  .cat-check svg{display:none;}
-  .cat-check.checked svg{display:block;}
-  .cat-check-placeholder{width:20px;height:20px;flex-shrink:0;}
-  .cat-divider{width:1px;height:32px;background:var(--border);flex-shrink:0;margin:0 2px;}
+  .cat-hdr{display:flex;align-items:center;background:#141824;padding:0 8px;min-height:54px;gap:6px;cursor:pointer;user-select:none;border-bottom:1px solid transparent;transition:background .15s;}
+  .cat-hdr:active{background:#1a2030;}
+  .cat-hdr.open{border-bottom-color:var(--border);}
+  .ccg{display:flex;flex-direction:column;align-items:center;gap:2px;flex-shrink:0;}
+  .ccl{font-size:.52rem;letter-spacing:.5px;font-weight:700;text-transform:uppercase;line-height:1;}
+  .ccl.g{color:var(--gold);}
+  .ccl.d{color:var(--diamond);}
+  .ccl.n{color:var(--next);}
+  .dli{width:10px;height:10px;background:var(--diamond);clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);}
+  .cck{width:20px;height:20px;border-radius:4px;border:2px solid var(--gold);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s;z-index:2;}
+  .cck.checked{background:var(--gold);}
+  .cck svg{display:none;}
+  .cck.checked svg{display:block;}
+  .cph{width:20px;height:20px;flex-shrink:0;}
+  .cdv{width:1px;height:32px;background:var(--border);flex-shrink:0;margin:0 2px;}
   .cat-name{flex:1;font-size:.88rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:4px;}
-  .cat-counts{display:flex;flex-direction:column;align-items:flex-end;font-family:'Share Tech Mono',monospace;font-size:.63rem;white-space:nowrap;flex-shrink:0;gap:1px;}
-  .cat-counts .nc{color:var(--next);}
-  .cat-counts .gc{color:var(--gold);}
-  .cat-counts .dc{color:var(--diamond);}
-  .chevron{color:var(--dim);font-size:.9rem;transition:transform .2s;flex-shrink:0;}
-  .cat-header.open .chevron{transform:rotate(180deg);}
-
-  /* WEAPON LIST */
+  .cat-cnt{display:flex;flex-direction:column;align-items:flex-end;font-family:'Share Tech Mono',monospace;font-size:.63rem;white-space:nowrap;flex-shrink:0;gap:1px;}
+  .cat-cnt .nc{color:var(--next);}
+  .cat-cnt .gc{color:var(--gold);}
+  .cat-cnt .dc{color:var(--diamond);}
+  .chev{color:var(--dim);font-size:.9rem;transition:transform .2s;flex-shrink:0;}
+  .cat-hdr.open .chev{transform:rotate(180deg);}
   .cat-body{display:none;background:var(--panel);}
   .cat-body.open{display:block;}
-  .weapon-row{display:flex;align-items:center;padding:9px 12px;border-bottom:1px solid var(--border);gap:7px;transition:background .1s;}
-  .weapon-row:last-child{border-bottom:none;}
-  .weapon-check{width:22px;height:22px;border-radius:4px;border:2px solid var(--dim);background:transparent;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
-  .weapon-check.next-cb.checked{background:var(--next);border-color:var(--next);}
-  .weapon-check.gold-cb.checked{background:var(--gold);border-color:var(--gold);}
-  .weapon-check.diam-cb.checked{background:var(--diamond);border-color:var(--diamond);}
-  .weapon-check svg{display:none;}
-  .weapon-check.next-cb.checked svg{display:block;}
-  .weapon-check.gold-cb.checked svg{display:block;}
-  .w-diam-icon{width:11px;height:11px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);display:none;}
-  .weapon-check.diam-cb.checked .w-diam-icon{display:block;}
-  .check-sep{width:1px;height:18px;background:var(--border);flex-shrink:0;}
-  .weapon-name{flex:1;font-size:.93rem;font-weight:500;letter-spacing:.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-  .weapon-row.next-done:not(.gold-done):not(.diam-done) .weapon-name{color:var(--next2);}
-  .weapon-row.gold-done:not(.diam-done) .weapon-name{color:var(--gold);text-decoration:line-through;opacity:.75;}
-  .weapon-row.diam-done .weapon-name{color:var(--diamond2);text-shadow:0 0 8px rgba(126,232,250,.45);text-decoration:none;opacity:1;}
-  .remove-btn{background:transparent;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:4px 5px;border-radius:4px;transition:color .15s,background .15s;line-height:1;flex-shrink:0;}
-  .remove-btn:active{color:var(--red);background:rgba(255,58,58,.1);}
-
-  /* ADD ROW */
+  .wrow{display:flex;align-items:center;padding:9px 12px;border-bottom:1px solid var(--border);gap:7px;}
+  .wrow:last-child{border-bottom:none;}
+  .wck{width:22px;height:22px;border-radius:4px;border:2px solid var(--dim);background:transparent;flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,border-color .15s;}
+  .wck.nx.checked{background:var(--next);border-color:var(--next);}
+  .wck.go.checked{background:var(--gold);border-color:var(--gold);}
+  .wck.di.checked{background:var(--diamond);border-color:var(--diamond);}
+  .wck svg{display:none;}
+  .wck.nx.checked svg,.wck.go.checked svg{display:block;}
+  .wdi{width:11px;height:11px;background:#000;clip-path:polygon(50% 0%,100% 40%,50% 100%,0% 40%);display:none;}
+  .wck.di.checked .wdi{display:block;}
+  .wsep{width:1px;height:18px;background:var(--border);flex-shrink:0;}
+  .wname{flex:1;font-size:.93rem;font-weight:500;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .wrow.nd:not(.gd):not(.dd) .wname{color:var(--next2);}
+  .wrow.gd:not(.dd) .wname{color:var(--gold);text-decoration:line-through;opacity:.75;}
+  .wrow.dd .wname{color:var(--diamond2);text-shadow:0 0 8px rgba(126,232,250,.45);text-decoration:none;opacity:1;}
+  .wrm{background:transparent;border:none;color:var(--dim);font-size:1rem;cursor:pointer;padding:4px 5px;border-radius:4px;transition:color .15s;line-height:1;flex-shrink:0;}
+  .wrm:active{color:var(--red);}
   .add-row{display:flex;padding:8px 10px;gap:8px;background:#0e1220;border-top:1px dashed var(--border);}
-  .add-input{flex:1;background:#1a1f2e;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:7px 10px;font-family:'Rajdhani',sans-serif;font-size:.9rem;outline:none;}
-  .add-input:focus{border-color:var(--gold);}
-  .add-btn{background:var(--gold);border:none;color:#000;border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;padding:0 14px;cursor:pointer;letter-spacing:1px;}
-  .add-feedback{font-size:.72rem;padding:3px 10px 6px;font-family:'Share Tech Mono',monospace;display:none;}
-  .add-feedback.error{color:var(--red);display:block;}
-  .add-feedback.syncing{color:var(--editor-color);display:block;}
-  .add-feedback.success{color:var(--user-color);display:block;}
-
-  /* MODAL */
+  .add-inp{flex:1;background:#1a1f2e;border:1px solid var(--border);color:var(--text);border-radius:6px;padding:7px 10px;font-family:'Rajdhani',sans-serif;font-size:.9rem;outline:none;}
+  .add-inp:focus{border-color:var(--gold);}
+  .add-btn{background:var(--gold);border:none;color:#000;border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;padding:0 14px;cursor:pointer;}
+  .afb{font-size:.72rem;padding:3px 10px 6px;font-family:'Share Tech Mono',monospace;display:none;}
+  .afb.err{color:var(--red);display:block;}
+  .afb.syn{color:var(--ec);display:block;}
+  .afb.ok{color:var(--uc);display:block;}
   .modal-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:400;align-items:center;justify-content:center;padding:20px;}
   .modal-backdrop.show{display:flex;}
   .modal{background:#141824;border:1px solid var(--gold);border-radius:10px;padding:22px 18px 16px;max-width:340px;width:100%;text-align:center;}
   .modal h3{font-size:1rem;letter-spacing:1px;color:var(--gold2);margin-bottom:10px;text-transform:uppercase;}
   .modal p{font-size:.85rem;color:var(--text);margin-bottom:16px;line-height:1.5;}
-  .modal-btns{display:flex;gap:8px;flex-wrap:wrap;}
-  .modal-btn{flex:1;min-width:80px;padding:10px 6px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;letter-spacing:1px;cursor:pointer;border:none;text-transform:uppercase;}
-  .modal-btn.confirm{background:var(--red);color:#fff;}
-  .modal-btn.confirm.editor-confirm{background:var(--editor-color);color:#000;}
-  .modal-btn.confirm.gold-confirm{background:var(--gold);color:#000;}
-  .modal-btn.confirm.diam-confirm{background:var(--diamond);color:#000;}
-  .modal-btn.confirm.primary-confirm{background:var(--primary-color);color:#000;}
-  .modal-btn.confirm.secondary-confirm{background:var(--secondary-color);color:#000;}
-  .modal-btn.cancel{background:var(--panel);color:var(--text);border:1px solid var(--border);}
-
-  /* TOAST */
-  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:#000;font-weight:700;font-size:.82rem;letter-spacing:1px;padding:10px 18px;border-radius:8px;z-index:500;transition:transform .3s ease;white-space:nowrap;}
+  .mbtns{display:flex;gap:8px;flex-wrap:wrap;}
+  .mbtn{flex:1;min-width:80px;padding:10px 6px;border-radius:6px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;border:none;text-transform:uppercase;}
+  .mbtn.c{background:var(--red);color:#fff;}
+  .mbtn.c.ec{background:var(--ec);color:#000;}
+  .mbtn.c.gc{background:var(--gold);color:#000;}
+  .mbtn.c.dc{background:var(--diamond);color:#000;}
+  .mbtn.c.pc{background:var(--pc);color:#000;}
+  .mbtn.c.sc{background:var(--sc);color:#000;}
+  .mbtn.x{background:var(--panel);color:var(--text);border:1px solid var(--border);}
+  #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--gold);color:#000;font-weight:700;font-size:.82rem;padding:10px 18px;border-radius:8px;z-index:500;transition:transform .3s ease;white-space:nowrap;}
   #toast.show{transform:translateX(-50%) translateY(0);}
 </style>
 </head>
 <body>
-
 <div id="topbar">
   <h1>⚔️ COD Mobile</h1>
   <div style="display:flex;gap:8px;align-items:center">
-    <button class="icon-btn" id="bookmarkBtn">🔖</button>
-    <a class="icon-btn" id="downloadBtn">💾</a>
-    <button class="icon-btn" id="settingsBtn">⚙️</button>
+    <button class="icon-btn" id="bkBtn">🔖</button>
+    <a class="icon-btn" id="dlBtn">💾</a>
+    <button class="icon-btn" id="stBtn">⚙️</button>
   </div>
 </div>
-
 <div id="mode-bar">
   <span id="mode-label">MODE:</span>
   <div id="mode-toggle">
@@ -227,679 +188,324 @@
     <button class="mode-btn editor" id="btn-editor">✏️ Editor</button>
   </div>
 </div>
-
-<!-- UP NEXT SECTION -->
 <div id="upnext-section">
   <div id="upnext-header">
     <span id="upnext-title">🔶 Up Next</span>
-    <div class="upnext-control">
-      <div class="toggle-check" id="dual-toggle">
-        <svg width="10" height="8" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </div>
+    <div class="upnext-ctrl">
+      <div class="tog" id="dual-tog"><svg width="10" height="8" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <span id="dual-label">Dual Wielding</span>
     </div>
     <button id="showlist-btn">Show List</button>
   </div>
   <div id="upnext-body">
-    <div id="upnext-empty">No guns queued. Tap the 🔶 checkbox on any weapon to add it.</div>
+    <div id="upnext-empty">No guns queued. Tap 🔶 on any weapon to add it.</div>
     <div id="upnext-cards"></div>
   </div>
 </div>
-
-<!-- PROGRESS -->
 <div id="progress-wrap">
-  <div class="prog-row">
-    <div class="prog-label"><span class="next-label">🔶 NEXT UP</span><span class="next-label" id="next-nums">0/0 — 0%</span></div>
-    <div class="prog-bar-bg"><div class="prog-bar" id="next-bar"></div></div>
-  </div>
-  <div class="prog-row">
-    <div class="prog-label"><span class="gold-label">🥇 GOLD</span><span class="gold-label" id="gold-nums">0/0 — 0%</span></div>
-    <div class="prog-bar-bg"><div class="prog-bar" id="gold-bar"></div></div>
-  </div>
-  <div class="prog-row">
-    <div class="prog-label"><span class="diam-label">💎 DIAMOND</span><span class="diam-label" id="diam-nums">0/0 — 0%</span></div>
-    <div class="prog-bar-bg"><div class="prog-bar" id="diam-bar"></div></div>
-  </div>
+  <div class="prog-row"><div class="prog-label"><span class="nl">🔶 NEXT UP</span><span class="nl" id="next-nums">0/0 — 0%</span></div><div class="prog-bar-bg"><div class="prog-bar" id="next-bar"></div></div></div>
+  <div class="prog-row"><div class="prog-label"><span class="gl">🥇 GOLD</span><span class="gl" id="gold-nums">0/0 — 0%</span></div><div class="prog-bar-bg"><div class="prog-bar" id="gold-bar"></div></div></div>
+  <div class="prog-row"><div class="prog-label"><span class="dl">💎 DIAMOND</span><span class="dl" id="diam-nums">0/0 — 0%</span></div><div class="prog-bar-bg"><div class="prog-bar" id="diam-bar"></div></div></div>
 </div>
-
 <div id="legend">
-  <div class="legend-item"><div class="legend-box n"><svg width="9" height="7" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="next-label">Next Up</span></div>
-  <div class="legend-item"><div class="legend-box g"><svg width="9" height="7" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="gold-label">Gold</span></div>
-  <div class="legend-item"><div class="legend-box d"><div class="legend-diam"></div></div><span class="diam-label">Diamond</span></div>
+  <div class="li"><div class="lb n"><svg width="9" height="7" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="nl">Next Up</span></div>
+  <div class="li"><div class="lb g"><svg width="9" height="7" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="gl">Gold</span></div>
+  <div class="li"><div class="lb d"><div class="ld"></div></div><span class="dl">Diamond</span></div>
 </div>
-
 <div id="categories"></div>
-
-<!-- SETTINGS -->
 <div id="settings-overlay">
   <div id="settings-panel">
     <h2>⚙️ Settings</h2>
-    <div class="settings-section">
+    <div class="ss">
       <h3>GitHub API</h3>
-      <p class="settings-note">Personal Access Token:</p>
-      <input class="settings-input" id="s-token" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
-      <p class="settings-note">Repository (username/repo-name):</p>
-      <input class="settings-input" id="s-repo" type="text" placeholder="venomknights/Cod-gun-checklist">
-      <p class="settings-note">File path in repo:</p>
-      <input class="settings-input" id="s-filepath" type="text" placeholder="cod_gold_checklist.html">
+      <p class="sn">Personal Access Token:</p>
+      <input class="si" id="s-tok" type="password" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx">
+      <p class="sn">Repository (username/repo-name):</p>
+      <input class="si" id="s-rep" type="text" placeholder="venomknights/Cod-gun-checklist">
+      <p class="sn">File path in repo:</p>
+      <input class="si" id="s-fp" type="text" placeholder="cod_gold_checklist.html">
       <div id="api-status"></div>
-      <button class="settings-btn save" id="s-save-api">Save API Settings</button>
+      <button class="sbtn save" id="s-save">Save API Settings</button>
     </div>
-    <div class="settings-section">
+    <div class="ss">
       <h3>Clear Progress</h3>
-      <p class="settings-note">Clears all Next Up, Gold, and Diamond progress. Weapon list unaffected.</p>
-      <button class="settings-btn danger" id="s-clear-all">🗑 Clear All My Progress</button>
+      <p class="sn">Clears all Next Up, Gold, Diamond marks. Weapon list unaffected.</p>
+      <button class="sbtn danger" id="s-clear">🗑 Clear All My Progress</button>
     </div>
-    <button class="settings-btn close-btn" id="s-close">Close</button>
+    <button class="sbtn close" id="s-close">Close</button>
   </div>
 </div>
-
-<!-- MODAL -->
 <div class="modal-backdrop" id="modal">
   <div class="modal">
-    <h3 id="modal-title">Confirm</h3>
-    <p id="modal-msg"></p>
-    <div class="modal-btns" id="modal-btns"></div>
+    <h3 id="m-title">Confirm</h3>
+    <p id="m-msg"></p>
+    <div class="mbtns" id="m-btns"></div>
   </div>
 </div>
-
 <div id="toast"></div>
-
 <script>
-// ── WEAPON DATA ───────────────────────────────────────────────────────────────
-const PRIMARY_CATS  = ['ar','smg','sniper','marksman','lmg'];
-const SECONDARY_CATS = ['pistol','melee','launcher'];
-
-const CATEGORIES_DEFAULT = [
-  {id:'ar',       name:'Assault Rifles',  weapons:['AK-47','AK117','ASM10','AS VAL','BK57','BP50','CR-56 AMAX','DR-H','EM2','FFAR 1','FR .556','Grau 5.56','HBRa3','HVK-30','ICR-1','KN-44','Kilo 141','Krig 6','LAG 53','LK24','M4','M13','M16','Maddox','Man-O-War','Oden','Peacekeeper MK2','Swordfish','Type 19','Type 25']},
-  {id:'smg',      name:'SMGs',            weapons:['AGR 556','Bizon','CBR4','Chicom','Cordite','CX-9','Fennec','GKS','KSP 45','LAPA','LC10','MAC-10','MSMC','MX9','OTs 9','PDW-57','Pharo','PPSH-41','QQ9','QXR','Razorback','RUS-79U','Sten','Striker 45','Switchblade X9','TEC-9','USS 9','VPM']},
-  {id:'sniper',   name:'Sniper Rifles',   weapons:['Arctic .50','DL Q33','HDR','Koshka','Locus','LW3-Tundra','M21 EBR','NA-45','Outlaw','Rytec AMR','SVD','XPR-50','ZRG 20mm']},
-  {id:'lmg',      name:'LMGs',            weapons:['Bruen MK9','Chopper','Dingo','Hades','Holger 26','M4LMG','MG42','MG82','PKM','RAAL MG','RPD','S36','TV 27','UL736']},
-  {id:'shotgun',  name:'Shotguns',        weapons:['Argus','BO Rogue','BY15','Echo','Einhorn Revolving','HS0405','HS2126','JAK-12','KRM-262','MX Guardian','R9-0','Striker']},
-  {id:'marksman', name:'Marksman Rifles', weapons:['Kilo Bolt-Action','M1 Garand','MK2','SKS','SO-14','SP-R 208','Type 63']},
-  {id:'pistol',   name:'Pistols',         weapons:['.50 GS','Crossbow','Dobvra','J358','L-CAR 9','MW11','Renetti','Shorty']},
-  {id:'melee',    name:'Melee',           weapons:['Axe','Baseball Bat','Butterfly Knife','Kali Sticks','Katana','Knife','Machete','Nunchucks','Prizefighters','Sickle','Wrench']},
-  {id:'launcher', name:'Launchers',       weapons:['D13 Sector','FHJ-18','SMRS','Thumper']},
+// PERMANENT KEYS — NEVER CHANGE
+const SK='cod_checklist', QK='cod_queue', STK='cod_settings';
+// All old keys ever used — auto-migrated
+const OLD_SK=['cod_gd_v1','cod_gd_v2','cod_gd_v3','cod_gd_v4'];
+const OLD_QK=['cod_queue_v1'];
+const PRICATS=['ar','smg','sniper','marksman','lmg'];
+const CATS=[
+  {id:'ar',name:'Assault Rifles',weapons:['AK-47','AK117','ASM10','AS VAL','BK57','BP50','CR-56 AMAX','DR-H','EM2','FFAR 1','FR .556','Grau 5.56','HBRa3','HVK-30','ICR-1','KN-44','Kilo 141','Krig 6','LAG 53','LK24','M4','M13','M16','Maddox','Man-O-War','Oden','Peacekeeper MK2','Swordfish','Type 19','Type 25']},
+  {id:'smg',name:'SMGs',weapons:['AGR 556','Bizon','CBR4','Chicom','Cordite','CX-9','Fennec','GKS','KSP 45','LAPA','LC10','MAC-10','MSMC','MX9','OTs 9','PDW-57','Pharo','PPSH-41','QQ9','QXR','Razorback','RUS-79U','Sten','Striker 45','Switchblade X9','TEC-9','USS 9','VPM']},
+  {id:'sniper',name:'Sniper Rifles',weapons:['Arctic .50','DL Q33','HDR','Koshka','Locus','LW3-Tundra','M21 EBR','NA-45','Outlaw','Rytec AMR','SVD','XPR-50','ZRG 20mm']},
+  {id:'lmg',name:'LMGs',weapons:['Bruen MK9','Chopper','Dingo','Hades','Holger 26','M4LMG','MG42','MG82','PKM','RAAL MG','RPD','S36','TV 27','UL736']},
+  {id:'shotgun',name:'Shotguns',weapons:['Argus','BO Rogue','BY15','Echo','Einhorn Revolving','HS0405','HS2126','JAK-12','KRM-262','MX Guardian','R9-0','Striker']},
+  {id:'marksman',name:'Marksman Rifles',weapons:['Kilo Bolt-Action','M1 Garand','MK2','SKS','SO-14','SP-R 208','Type 63']},
+  {id:'pistol',name:'Pistols',weapons:['.50 GS','Crossbow','Dobvra','J358','L-CAR 9','MW11','Renetti','Shorty']},
+  {id:'melee',name:'Melee',weapons:['Axe','Baseball Bat','Butterfly Knife','Kali Sticks','Katana','Knife','Machete','Nunchucks','Prizefighters','Sickle','Wrench']},
+  {id:'launcher',name:'Launchers',weapons:['D13 Sector','FHJ-18','SMRS','Thumper']},
 ];
-
-function getCatById(id){ return CATEGORIES_DEFAULT.find(c=>c.id===id); }
-function getCatForWeapon(wName){
-  for(const cat of CATEGORIES_DEFAULT){
-    const cs = state[cat.id];
-    if(cat.weapons.includes(wName)||(cs.extra||[]).includes(wName)) return cat;
-  }
-  return null;
-}
-
-// ── STATE ─────────────────────────────────────────────────────────────────────
-const STORE_KEY='cod_gd_v4', SETTINGS_KEY='cod_settings_v1', QUEUE_KEY='cod_queue_v1';
-
-function loadState(){ try{return JSON.parse(localStorage.getItem(STORE_KEY))||{};}catch{return{};} }
-function saveState(s){ try{localStorage.setItem(STORE_KEY,JSON.stringify(s));}catch{} }
-function loadSettings(){ try{return JSON.parse(localStorage.getItem(SETTINGS_KEY))||{};}catch{return{};} }
-function saveSettings(s){ try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(s));}catch{} }
-function loadQueue(){ try{return JSON.parse(localStorage.getItem(QUEUE_KEY))||{primary:[],secondary:[],dualWielding:false,showList:false};}catch{return{primary:[],secondary:[],dualWielding:false,showList:false};} }
-function saveQueue(q){ try{localStorage.setItem(QUEUE_KEY,JSON.stringify(q));}catch{} }
-
-let state    = loadState();
-let settings = loadSettings();
-let queue    = loadQueue();
-let editorMode = false;
-
-// queue item: { name, catId, goal:'gold'|'diamond'|'both', slot:'primary'|'secondary' }
-
-CATEGORIES_DEFAULT.forEach(cat=>{
-  if(!state[cat.id]) state[cat.id]={open:false,next:{},gold:{},diamond:{},extra:[]};
-  if(!state[cat.id].next)    state[cat.id].next={};
-  if(!state[cat.id].gold)    state[cat.id].gold={};
-  if(!state[cat.id].diamond) state[cat.id].diamond={};
-  if(!state[cat.id].extra)   state[cat.id].extra=[];
-  if(state[cat.id].weapons){state[cat.id].gold=state[cat.id].weapons;delete state[cat.id].weapons;}
-  if(state[cat.id].progress){state[cat.id].next=state[cat.id].progress;delete state[cat.id].progress;}
+function gc(id){return CATS.find(c=>c.id===id);}
+function gcw(w){return CATS.find(c=>c.weapons.includes(w)||(S[c.id]?.extra||[]).includes(w));}
+function lg(k){try{return JSON.parse(localStorage.getItem(k));}catch{return null;}}
+function ls(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+function ld(k){try{localStorage.removeItem(k);}catch{}}
+// MIGRATE
+(function(){
+  if(!lg(SK)){for(const k of OLD_SK){const d=lg(k);if(d){ls(SK,d);break;}}}
+  OLD_SK.forEach(k=>ld(k));
+  if(!lg(QK)){for(const k of OLD_QK){const d=lg(k);if(d){ls(QK,d);break;}}}
+  OLD_QK.forEach(k=>ld(k));
+})();
+let S=lg(SK)||{}, Q=lg(QK)||{primary:[],secondary:[],dualWielding:false,showList:false}, ST=lg(STK)||{};
+let EM=false;
+function ss(){ls(SK,S);}function sq(){ls(QK,Q);}function sst(){ls(STK,ST);}
+CATS.forEach(cat=>{
+  if(!S[cat.id])S[cat.id]={open:false,next:{},gold:{},diamond:{},extra:[]};
+  const cs=S[cat.id];
+  if(!cs.next)cs.next={};if(!cs.gold)cs.gold={};if(!cs.diamond)cs.diamond={};if(!cs.extra)cs.extra=[];
+  if(cs.weapons){cs.gold=cs.weapons;delete cs.weapons;}
+  if(cs.progress){cs.next=cs.progress;delete cs.progress;}
 });
-saveState(state);
-
-// ── MODAL ENGINE ──────────────────────────────────────────────────────────────
-function showModal(title, msg, buttons){
-  // buttons: [{label, cls, action}]
-  document.getElementById('modal-title').textContent = title;
-  document.getElementById('modal-msg').textContent   = msg;
-  const btns = document.getElementById('modal-btns');
-  btns.innerHTML = '';
-  buttons.forEach(b=>{
-    const btn = document.createElement('button');
-    btn.className = 'modal-btn ' + (b.cls||'cancel');
-    btn.textContent = b.label;
-    btn.addEventListener('click',()=>{
-      document.getElementById('modal').classList.remove('show');
-      if(b.action) b.action();
-    });
-    btns.appendChild(btn);
-  });
+if(!Q.primary)Q.primary=[];if(!Q.secondary)Q.secondary=[];
+ss();sq();
+const CSV=`<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function modal(title,msg,btns){
+  document.getElementById('m-title').textContent=title;
+  document.getElementById('m-msg').textContent=msg;
+  const el=document.getElementById('m-btns');el.innerHTML='';
+  btns.forEach(b=>{const btn=document.createElement('button');btn.className='mbtn '+(b.c||'x');btn.textContent=b.l;btn.onclick=()=>{document.getElementById('modal').classList.remove('show');b.a&&b.a();};el.appendChild(btn);});
   document.getElementById('modal').classList.add('show');
 }
-
-function showToast(msg,color){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.style.background=color||'var(--gold)'; t.style.color=(color==='var(--red)')?'#fff':'#000';
-  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200);
-}
-
-// ── GOAL COMPLETION CHECK ─────────────────────────────────────────────────────
-function isGoalMet(item){
-  const cs = state[item.catId];
-  if(!cs) return false;
-  if(item.goal==='gold')    return !!cs.gold[item.name];
-  if(item.goal==='diamond') return !!cs.diamond[item.name];
-  if(item.goal==='both')    return !!cs.gold[item.name] && !!cs.diamond[item.name];
-  return false;
-}
-
-function checkQueueCompletion(){
-  // remove completed items, promote queue, check if slot empty
+function toast(msg,bg){const t=document.getElementById('toast');t.textContent=msg;t.style.background=bg||'var(--gold)';t.style.color=bg==='var(--red)'?'#fff':'#000';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
+function gmet(item){const cs=S[item.catId];if(!cs)return false;if(item.goal==='gold')return!!cs.gold[item.name];if(item.goal==='diamond')return!!cs.diamond[item.name];if(item.goal==='both')return!!cs.gold[item.name]&&!!cs.diamond[item.name];return false;}
+function chkQ(){
+  let ch=false;
   ['primary','secondary'].forEach(slot=>{
-    if(queue[slot].length===0) return;
-    const item = queue[slot][0];
-    if(isGoalMet(item)){
-      queue[slot].shift();
-      saveQueue(queue);
-      // also clear next flag on the weapon
-      if(state[item.catId]) state[item.catId].next[item.name]=false;
-      saveState(state);
-      if(queue[slot].length===0){
-        // prompt to pull from other slot
-        const other = slot==='primary'?'secondary':'primary';
-        if(queue[other].length>0){
-          setTimeout(()=>{
-            showModal(
-              '🔶 Queue Empty',
-              `Your ${slot} queue is empty! Would you like to pull the next gun from your ${other} queue into ${slot}?`,
-              [
-                {label:'Yes',cls:'confirm gold-confirm',action:()=>{
-                  const moved = queue[other].shift();
-                  moved.slot = slot;
-                  queue[slot].push(moved);
-                  saveQueue(queue);
-                  renderUpNext();
-                }},
-                {label:'No',cls:'cancel'}
-              ]
-            );
-          },400);
-        }
-      }
-      renderUpNext();
-      refreshAllCategories();
+    if(!Q[slot].length)return;
+    if(gmet(Q[slot][0])){
+      const d=Q[slot].shift();ch=true;
+      if(S[d.catId])S[d.catId].next[d.name]=false;ss();
+      if(!Q[slot].length){const o=slot==='primary'?'secondary':'primary';if(Q[o].length){setTimeout(()=>modal('🔶 Queue Empty',`${slot} queue empty! Pull from ${o}?`,[{l:'Yes',c:'c gc',a:()=>{const m=Q[o].shift();m.slot=slot;Q[slot].push(m);sq();rUN();}},{l:'No',c:'x'}]),400);}}
     }
   });
+  if(ch){sq();rUN();rAll();}
 }
-
-// ── UP NEXT RENDERING ─────────────────────────────────────────────────────────
-const CHECK_SVG=`<svg width="13" height="10" viewBox="0 0 13 10" fill="none"><polyline points="1,5 5,9 12,1" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-function renderUpNext(){
-  const cards = document.getElementById('upnext-cards');
-  const empty = document.getElementById('upnext-empty');
+function rUN(){
+  const cards=document.getElementById('upnext-cards'),empty=document.getElementById('upnext-empty');
   cards.innerHTML='';
-
-  const hasPrimary   = queue.primary.length>0;
-  const hasSecondary = queue.secondary.length>0;
-
-  if(!hasPrimary && !hasSecondary){
-    empty.style.display='block'; return;
+  const hp=Q.primary.length>0,hs=Q.secondary.length>0;
+  empty.style.display=(!hp&&!hs)?'block':'none';
+  if(!hp&&!hs)return;
+  if(Q.showList){
+    if(hp){const s=mkSec(Q.dualWielding?'🔵 PRIMARY QUEUE':'🔶 QUEUE','qlbl '+(Q.dualWielding?'pl':'nl'));Q.primary.forEach((it,i)=>s.appendChild(mkLI(it,i,'primary')));cards.appendChild(s);}
+    if(hs){const s=mkSec('🩷 SECONDARY QUEUE','qlbl sl');Q.secondary.forEach((it,i)=>s.appendChild(mkLI(it,i,'secondary')));cards.appendChild(s);}
+  }else{
+    const w=document.createElement('div');w.className='cards-wrap';
+    if(hp)w.appendChild(mkCard(Q.primary[0],0,'primary'));
+    if(hs)w.appendChild(mkCard(Q.secondary[0],0,'secondary'));
+    cards.appendChild(w);
   }
-  empty.style.display='none';
-
-  if(queue.showList){
-    // show full ordered lists
-    if(hasPrimary){
-      const sec = document.createElement('div'); sec.className='queue-section';
-      const lbl = document.createElement('div'); lbl.className='queue-label '+(queue.dualWielding?'primary-label':'simple-label');
-      lbl.textContent = queue.dualWielding ? '🔵 PRIMARY QUEUE' : '🔶 QUEUE';
-      sec.appendChild(lbl);
-      queue.primary.forEach((item,i)=>sec.appendChild(buildQueueListItem(item,i,'primary')));
-      cards.appendChild(sec);
-    }
-    if(hasSecondary){
-      const sec = document.createElement('div'); sec.className='queue-section';
-      const lbl = document.createElement('div'); lbl.className='queue-label secondary-label';
-      lbl.textContent='🩷 SECONDARY QUEUE';
-      sec.appendChild(lbl);
-      queue.secondary.forEach((item,i)=>sec.appendChild(buildQueueListItem(item,i,'secondary')));
-      cards.appendChild(sec);
-    }
-  } else {
-    // show active cards only (current #1 of each slot)
-    const wrap = document.createElement('div');
-    wrap.style.cssText='display:flex;gap:8px;';
-    if(hasPrimary){
-      wrap.appendChild(buildGunCard(queue.primary[0], 0, 'primary'));
-    }
-    if(hasSecondary){
-      wrap.appendChild(buildGunCard(queue.secondary[0], 0, 'secondary'));
-    }
-    cards.appendChild(wrap);
-  }
-
-  // dual toggle state
-  const dt = document.getElementById('dual-toggle');
-  dt.classList.toggle('on', queue.dualWielding);
-  document.getElementById('dual-label').classList.toggle('on', queue.dualWielding);
-  document.getElementById('showlist-btn').classList.toggle('on', queue.showList);
+  document.getElementById('dual-tog').classList.toggle('on',Q.dualWielding);
+  document.getElementById('dual-label').classList.toggle('on',Q.dualWielding);
+  document.getElementById('showlist-btn').classList.toggle('on',Q.showList);
 }
-
-function buildGunCard(item, idx, slot){
-  const cs = state[item.catId]||{};
-  const isG = !!cs.gold?.[item.name];
-  const isD = !!cs.diamond?.[item.name];
-  const isDual = queue.dualWielding;
-  const cardClass = isDual ? (slot==='primary'?'gun-card primary-card':'gun-card secondary-card') : 'gun-card simple-card';
-
-  const card = document.createElement('div');
-  card.className = cardClass; card.style.flex='1';
-
-  const top = document.createElement('div'); top.className='gun-card-top';
-  const num = document.createElement('div'); num.className='gun-card-num'; num.textContent='#'+(idx+1);
-  const name = document.createElement('div'); name.className='gun-card-name'; name.textContent=item.name;
-  const cat = document.createElement('div'); cat.className='gun-card-cat'; cat.textContent=getCatById(item.catId)?.name||'';
-  const rmv = document.createElement('button'); rmv.className='gun-card-remove'; rmv.textContent='✕'; rmv.title='Remove from Up Next';
-  rmv.addEventListener('click',()=> removeFromQueue(item.name, slot));
-  top.appendChild(num); top.appendChild(name); top.appendChild(cat); top.appendChild(rmv);
-
-  const goals = document.createElement('div'); goals.className='gun-card-goals';
-
+function mkSec(lbl,cls){const s=document.createElement('div');s.className='qsec';const l=document.createElement('div');l.className=cls;l.textContent=lbl;s.appendChild(l);return s;}
+function mkCard(item,idx,slot){
+  const cs=S[item.catId]||{};const isG=!!cs.gold?.[item.name],isD=!!cs.diamond?.[item.name];
+  const card=document.createElement('div');card.className='gun-card '+(Q.dualWielding?(slot==='primary'?'pc':'sc'):'nc');
+  const top=document.createElement('div');top.className='card-top';
+  const num=document.createElement('div');num.className='card-num';num.textContent='#'+(idx+1);
+  const nm=document.createElement('div');nm.className='card-name';nm.textContent=item.name;
+  const ct=document.createElement('div');ct.className='card-cat';ct.textContent=gc(item.catId)?.name||'';
+  const rm=document.createElement('button');rm.className='card-rm';rm.textContent='✕';rm.onclick=()=>rmQ(item.name,slot);
+  top.appendChild(num);top.appendChild(nm);top.appendChild(ct);top.appendChild(rm);
+  const goals=document.createElement('div');goals.className='card-goals';
   if(item.goal==='gold'||item.goal==='both'){
-    const gw = document.createElement('div'); gw.className='goal-check-wrap';
-    const gcb = document.createElement('div'); gcb.className='goal-cb gold-cb'+(isG?' checked':''); gcb.innerHTML=CHECK_SVG;
-    const gl = document.createElement('span'); gl.className='goal-label gold-lbl'+(isG?' done':''); gl.textContent='Gold';
-    gcb.addEventListener('click',()=>{
-      cs.gold[item.name]=!cs.gold[item.name]; saveState(state);
-      if(cs.gold[item.name]) cs.next[item.name]=false; // clear next flag if gold done
-      checkQueueCompletion(); renderUpNext(); updateProgress(); refreshAllCategories();
-    });
-    gw.appendChild(gcb); gw.appendChild(gl); goals.appendChild(gw);
+    const w=document.createElement('div');w.className='gcw';
+    const cb=document.createElement('div');cb.className='gcb g'+(isG?' checked':'');cb.innerHTML=CSV;
+    const lb=document.createElement('span');lb.className='glbl g'+(isG?' done':'');lb.textContent='Gold';
+    cb.onclick=()=>{cs.gold[item.name]=!cs.gold[item.name];if(cs.gold[item.name])cs.next[item.name]=false;ss();chkQ();rUN();updP();rAll();};
+    w.appendChild(cb);w.appendChild(lb);goals.appendChild(w);
   }
   if(item.goal==='diamond'||item.goal==='both'){
-    const dw = document.createElement('div'); dw.className='goal-check-wrap';
-    const dcb = document.createElement('div'); dcb.className='goal-cb diam-cb'+(isD?' checked':''); dcb.innerHTML=`<div class="diam-icon"></div>`;
-    const dl = document.createElement('span'); dl.className='goal-label diam-lbl'+(isD?' done':''); dl.textContent='Diamond';
-    dcb.addEventListener('click',()=>{
-      cs.diamond[item.name]=!cs.diamond[item.name]; saveState(state);
-      checkQueueCompletion(); renderUpNext(); updateProgress(); refreshAllCategories();
-    });
-    dw.appendChild(dcb); dw.appendChild(dl); goals.appendChild(dw);
+    const w=document.createElement('div');w.className='gcw';
+    const cb=document.createElement('div');cb.className='gcb d'+(isD?' checked':'');cb.innerHTML=`<div class="cdi"></div>`;
+    const lb=document.createElement('span');lb.className='glbl d'+(isD?' done':'');lb.textContent='Diamond';
+    cb.onclick=()=>{cs.diamond[item.name]=!cs.diamond[item.name];ss();chkQ();rUN();updP();rAll();};
+    w.appendChild(cb);w.appendChild(lb);goals.appendChild(w);
   }
-
-  card.appendChild(top); card.appendChild(goals);
-  return card;
+  card.appendChild(top);card.appendChild(goals);return card;
 }
-
-function buildQueueListItem(item, idx, slot){
-  const row = document.createElement('div'); row.className='queue-list-item';
-  const pos = document.createElement('div'); pos.className='queue-pos'; pos.textContent='#'+(idx+1);
-  const nm  = document.createElement('div'); nm.className='queue-item-name'; nm.textContent=item.name;
-  const gl  = document.createElement('div'); gl.className='queue-item-goals';
-  gl.textContent = item.goal==='both'?'Gold+Diam': item.goal==='gold'?'Gold':'Diam';
-  const rm  = document.createElement('button'); rm.className='queue-item-remove'; rm.textContent='✕';
-  rm.addEventListener('click',()=> removeFromQueue(item.name, slot));
-  row.appendChild(pos); row.appendChild(nm); row.appendChild(gl); row.appendChild(rm);
-  return row;
+function mkLI(item,idx,slot){
+  const row=document.createElement('div');row.className='qrow';
+  const pos=document.createElement('div');pos.className='qpos';pos.textContent='#'+(idx+1);
+  const nm=document.createElement('div');nm.className='qname';nm.textContent=item.name;
+  const gl=document.createElement('div');gl.className='qgoal';gl.textContent=item.goal==='both'?'Gold+Diam':item.goal==='gold'?'Gold':'Diam';
+  const rm=document.createElement('button');rm.className='qrm';rm.textContent='✕';rm.onclick=()=>rmQ(item.name,slot);
+  row.appendChild(pos);row.appendChild(nm);row.appendChild(gl);row.appendChild(rm);return row;
 }
-
-function removeFromQueue(wName, slot){
-  queue[slot] = queue[slot].filter(i=>i.name!==wName);
-  // if nothing in queue for this weapon at all, clear next flag
-  const inOther = queue[slot==='primary'?'secondary':'primary'].some(i=>i.name===wName);
-  if(!inOther){
-    const cat = getCatForWeapon(wName);
-    if(cat) state[cat.id].next[wName]=false;
-    saveState(state);
-  }
-  saveQueue(queue);
-  renderUpNext(); updateProgress(); refreshAllCategories();
+function rmQ(w,slot){
+  Q[slot]=Q[slot].filter(i=>i.name!==w);
+  const io=Q[slot==='primary'?'secondary':'primary'].some(i=>i.name===w);
+  if(!io){const c=gcw(w);if(c){S[c.id].next[w]=false;ss();}}
+  sq();rUN();updP();rAll();
 }
-
-// ── DUAL WIELDING TOGGLE ──────────────────────────────────────────────────────
-document.getElementById('dual-toggle').addEventListener('click',()=>{
-  if(queue.dualWielding){
-    // turning OFF — warn about primary weapons in secondary slot
-    const primaryWeapsInSecondary = queue.secondary.filter(i=>PRIMARY_CATS.includes(i.catId));
-    const msg = primaryWeapsInSecondary.length>0
-      ? `Disabling Dual Wielding will remove ${primaryWeapsInSecondary.length} primary weapon(s) from your Secondary queue. Their Gold/Diamond progress will not be affected. Continue?`
-      : 'Disable Dual Wielding?';
-    showModal('Dual Wielding Off', msg, [
-      {label:'Disable',cls:'confirm',action:()=>{
-        queue.secondary = queue.secondary.filter(i=>!PRIMARY_CATS.includes(i.catId));
-        queue.dualWielding=false; saveQueue(queue); renderUpNext();
-      }},
-      {label:'Cancel',cls:'cancel'}
-    ]);
-  } else {
-    queue.dualWielding=true; saveQueue(queue); renderUpNext();
-  }
-});
-
-document.getElementById('dual-label').addEventListener('click',()=> document.getElementById('dual-toggle').click());
-
-document.getElementById('showlist-btn').addEventListener('click',()=>{
-  queue.showList=!queue.showList; saveQueue(queue); renderUpNext();
-});
-
-// ── ADD TO QUEUE (called when Next Up checkbox tapped) ────────────────────────
-function addToQueue(wName, catId){
-  const isPrimaryCat = PRIMARY_CATS.includes(catId);
-
-  // Step 1: ask goal
-  showModal(
-    '🔶 Up Next — Set Goal',
-    `What are you working toward for ${wName}?`,
-    [
-      {label:'🥇 Gold',   cls:'confirm gold-confirm',   action:()=> askSlot(wName,catId,'gold',isPrimaryCat)},
-      {label:'💎 Diamond',cls:'confirm diam-confirm',   action:()=> askSlot(wName,catId,'diamond',isPrimaryCat)},
-      {label:'Both',      cls:'confirm',                action:()=> askSlot(wName,catId,'both',isPrimaryCat)},
-      {label:'Cancel',    cls:'cancel',                 action:()=>{ unsetNext(wName,catId); }},
-    ]
-  );
-}
-
-function askSlot(wName, catId, goal, isPrimaryCat){
-  if(!isPrimaryCat){
-    // natural secondary — goes straight to secondary slot
-    pushToQueue(wName,catId,goal,'secondary');
-  } else {
-    // ask primary or secondary
-    showModal(
-      '🔶 Up Next — Slot',
-      `Which slot for ${wName}?`,
-      [
-        {label:'🔵 Primary',  cls:'confirm primary-confirm',   action:()=> pushToQueue(wName,catId,goal,'primary')},
-        {label:'🩷 Secondary', cls:'confirm secondary-confirm', action:()=>{
-          if(!queue.dualWielding){
-            queue.dualWielding=true; saveQueue(queue);
-            showToast('Dual Wielding enabled!');
-          }
-          pushToQueue(wName,catId,goal,'secondary');
-        }},
-        {label:'Cancel', cls:'cancel', action:()=>{ unsetNext(wName,catId); }},
-      ]
-    );
-  }
-}
-
-function pushToQueue(wName, catId, goal, slot){
-  // avoid duplicates in queue
-  const already = queue[slot].some(i=>i.name===wName) || queue[slot==='primary'?'secondary':'primary'].some(i=>i.name===wName);
-  if(already){ showToast('Already in queue!','var(--red)'); return; }
-  queue[slot].push({name:wName, catId, goal, slot});
-  saveQueue(queue);
-  renderUpNext();
-}
-
-function unsetNext(wName, catId){
-  state[catId].next[wName]=false;
-  saveState(state);
-  refreshCategory(getCatById(catId));
-  updateProgress();
-}
-
-// ── MODE TOGGLE ───────────────────────────────────────────────────────────────
-function setMode(mode){
-  editorMode=(mode==='editor');
-  document.getElementById('btn-user').classList.toggle('active',!editorMode);
-  document.getElementById('btn-editor').classList.toggle('active',editorMode);
-}
-document.getElementById('btn-user').addEventListener('click',()=> setMode('user'));
-document.getElementById('btn-editor').addEventListener('click',()=>{
-  if(!settings.token||!settings.repo||!settings.filepath){
-    showModal('⚙️ API Required','Editor Mode requires a GitHub token. Configure it in Settings first.',[
-      {label:'Open Settings',cls:'confirm editor-confirm',action:openSettings},
-      {label:'Cancel',cls:'cancel'}
-    ]); return;
-  }
-  showModal('✏️ Enter Editor Mode?','WARNING: Weapon list changes will commit directly to GitHub and affect all users of this app.',[
-    {label:'Enter Editor',cls:'confirm editor-confirm',action:()=>setMode('editor')},
-    {label:'Cancel',cls:'cancel'}
+document.getElementById('dual-tog').onclick=()=>{
+  if(Q.dualWielding){
+    const n=Q.secondary.filter(i=>PRICATS.includes(i.catId)).length;
+    modal('Disable Dual Wielding?',n>0?`Will remove ${n} primary weapon(s) from Secondary queue. Gold/Diamond progress unaffected.`:'Disable Dual Wielding?',[
+      {l:'Disable',c:'c',a:()=>{Q.secondary=Q.secondary.filter(i=>!PRICATS.includes(i.catId));Q.dualWielding=false;sq();rUN();}},{l:'Cancel',c:'x'}]);
+  }else{Q.dualWielding=true;sq();rUN();}
+};
+document.getElementById('dual-label').onclick=()=>document.getElementById('dual-tog').click();
+document.getElementById('showlist-btn').onclick=()=>{Q.showList=!Q.showList;sq();rUN();};
+function addQ(wName,catId){
+  const ip=PRICATS.includes(catId);
+  modal('🔶 Set Goal',`Goal for ${wName}:`,[
+    {l:'🥇 Gold',c:'c gc',a:()=>askSlot(wName,catId,'gold',ip)},
+    {l:'💎 Diamond',c:'c dc',a:()=>askSlot(wName,catId,'diamond',ip)},
+    {l:'Both',c:'c',a:()=>askSlot(wName,catId,'both',ip)},
+    {l:'Cancel',c:'x',a:()=>unN(wName,catId)},
   ]);
-});
-
-// ── SETTINGS ──────────────────────────────────────────────────────────────────
-function openSettings(){
-  document.getElementById('s-token').value    = settings.token    ||'';
-  document.getElementById('s-repo').value     = settings.repo     ||'';
-  document.getElementById('s-filepath').value = settings.filepath ||'';
-  updateApiStatus();
-  document.getElementById('settings-overlay').classList.add('show');
 }
-function closeSettings(){ document.getElementById('settings-overlay').classList.remove('show'); }
-function updateApiStatus(){
-  const el=document.getElementById('api-status');
-  if(settings.token&&settings.repo&&settings.filepath){ el.style.color='var(--user-color)'; el.textContent='✓ API configured — '+settings.repo; }
-  else{ el.style.color='var(--dim)'; el.textContent='No API configured — changes will be local only.'; }
-}
-document.getElementById('settingsBtn').addEventListener('click',openSettings);
-document.getElementById('s-close').addEventListener('click',closeSettings);
-document.getElementById('settings-overlay').addEventListener('click',e=>{ if(e.target===document.getElementById('settings-overlay')) closeSettings(); });
-document.getElementById('s-save-api').addEventListener('click',()=>{
-  settings.token    = document.getElementById('s-token').value.trim();
-  settings.repo     = document.getElementById('s-repo').value.trim();
-  settings.filepath = document.getElementById('s-filepath').value.trim();
-  saveSettings(settings); updateApiStatus(); showToast('✓ Settings saved!');
-});
-document.getElementById('s-clear-all').addEventListener('click',()=>{
-  showModal('Clear All Progress','Erase ALL Next Up, Gold, and Diamond marks? Weapon list unaffected.',[
-    {label:'Clear All',cls:'confirm',action:()=>{
-      CATEGORIES_DEFAULT.forEach(cat=>{
-        const cs=state[cat.id]; const all=[...cat.weapons,...(cs.extra||[])];
-        all.forEach(w=>{cs.next[w]=false;cs.gold[w]=false;cs.diamond[w]=false;});
-      });
-      saveState(state); buildAll(); showToast('Progress cleared.','var(--red)');
-    }},
-    {label:'Cancel',cls:'cancel'}
+function askSlot(w,cid,goal,ip){
+  if(!ip){pushQ(w,cid,goal,'secondary');return;}
+  modal('🔶 Select Slot',`Slot for ${w}:`,[
+    {l:'🔵 Primary',c:'c pc',a:()=>pushQ(w,cid,goal,'primary')},
+    {l:'🩷 Secondary',c:'c sc',a:()=>{if(!Q.dualWielding){Q.dualWielding=true;sq();toast('Dual Wielding enabled!');}pushQ(w,cid,goal,'secondary');}},
+    {l:'Cancel',c:'x',a:()=>unN(w,cid)},
   ]);
-});
-
-// ── GITHUB API ────────────────────────────────────────────────────────────────
-async function getGitHubFileSHA(){
-  const res=await fetch(`https://api.github.com/repos/${settings.repo}/contents/${settings.filepath}`,{headers:{Authorization:`token ${settings.token}`,Accept:'application/vnd.github.v3+json'}});
-  if(!res.ok) throw new Error('Could not fetch file');
-  return (await res.json()).sha;
 }
-async function commitToGitHub(content){
-  const sha=await getGitHubFileSHA();
-  const res=await fetch(`https://api.github.com/repos/${settings.repo}/contents/${settings.filepath}`,{
-    method:'PUT', headers:{Authorization:`token ${settings.token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},
-    body:JSON.stringify({message:'Update weapon list via COD checklist app',content:btoa(unescape(encodeURIComponent(content))),sha})
-  });
-  if(!res.ok) throw new Error('GitHub commit failed');
+function pushQ(w,cid,goal,slot){
+  if(Q.primary.some(i=>i.name===w)||Q.secondary.some(i=>i.name===w)){toast('Already in queue!','var(--red)');return;}
+  Q[slot].push({name:w,catId:cid,goal,slot});sq();rUN();
 }
-
-// ── PROGRESS ──────────────────────────────────────────────────────────────────
-function updateProgress(){
-  let total=0,nDone=0,gDone=0,dDone=0;
-  CATEGORIES_DEFAULT.forEach(cat=>{
-    const cs=state[cat.id]; const all=[...cat.weapons,...(cs.extra||[])];
-    total+=all.length;
-    all.forEach(w=>{ if(cs.next[w])nDone++; if(cs.gold[w])gDone++; if(cs.diamond[w])dDone++; });
-  });
-  const np=total?Math.round(nDone/total*100):0, gp=total?Math.round(gDone/total*100):0, dp=total?Math.round(dDone/total*100):0;
-  document.getElementById('next-nums').textContent=`${nDone}/${total} — ${np}%`;
-  document.getElementById('gold-nums').textContent=`${gDone}/${total} — ${gp}%`;
-  document.getElementById('diam-nums').textContent=`${dDone}/${total} — ${dp}%`;
+function unN(w,cid){S[cid].next[w]=false;ss();rCat(gc(cid));updP();}
+function setMode(m){EM=m==='editor';document.getElementById('btn-user').classList.toggle('active',!EM);document.getElementById('btn-editor').classList.toggle('active',EM);}
+document.getElementById('btn-user').onclick=()=>setMode('user');
+document.getElementById('btn-editor').onclick=()=>{
+  if(!ST.token||!ST.repo||!ST.fp){modal('API Required','Configure GitHub token in Settings first.',[{l:'Open Settings',c:'c ec',a:openST},{l:'Cancel',c:'x'}]);return;}
+  modal('✏️ Enter Editor Mode?','WARNING: Weapon changes will commit to GitHub and affect all users.',[{l:'Enter Editor',c:'c ec',a:()=>setMode('editor')},{l:'Cancel',c:'x'}]);
+};
+function openST(){document.getElementById('s-tok').value=ST.token||'';document.getElementById('s-rep').value=ST.repo||'';document.getElementById('s-fp').value=ST.fp||'';updAS();document.getElementById('settings-overlay').classList.add('show');}
+function closeST(){document.getElementById('settings-overlay').classList.remove('show');}
+function updAS(){const el=document.getElementById('api-status');if(ST.token&&ST.repo&&ST.fp){el.style.color='var(--uc)';el.textContent='✓ API configured — '+ST.repo;}else{el.style.color='var(--dim)';el.textContent='No API configured — changes local only.';}}
+document.getElementById('stBtn').onclick=openST;
+document.getElementById('s-close').onclick=closeST;
+document.getElementById('settings-overlay').onclick=e=>{if(e.target===document.getElementById('settings-overlay'))closeST();};
+document.getElementById('s-save').onclick=()=>{ST.token=document.getElementById('s-tok').value.trim();ST.repo=document.getElementById('s-rep').value.trim();ST.fp=document.getElementById('s-fp').value.trim();sst();updAS();toast('✓ Settings saved!');};
+document.getElementById('s-clear').onclick=()=>{modal('Clear All Progress','Erase ALL Next Up, Gold, Diamond marks? Cannot be undone.',[{l:'Clear All',c:'c',a:()=>{CATS.forEach(cat=>{const cs=S[cat.id];[...cat.weapons,...(cs.extra||[])].forEach(w=>{cs.next[w]=false;cs.gold[w]=false;cs.diamond[w]=false;});});ss();buildAll();toast('Progress cleared.','var(--red)');}},{l:'Cancel',c:'x'}]);};
+async function ghSHA(){const r=await fetch(`https://api.github.com/repos/${ST.repo}/contents/${ST.fp}`,{headers:{Authorization:`token ${ST.token}`,Accept:'application/vnd.github.v3+json'}});if(!r.ok)throw new Error('Fetch failed');return(await r.json()).sha;}
+async function ghCommit(html){const sha=await ghSHA();const r=await fetch(`https://api.github.com/repos/${ST.repo}/contents/${ST.fp}`,{method:'PUT',headers:{Authorization:`token ${ST.token}`,Accept:'application/vnd.github.v3+json','Content-Type':'application/json'},body:JSON.stringify({message:'Update weapon list',content:btoa(unescape(encodeURIComponent(html))),sha})});if(!r.ok)throw new Error('Commit failed');}
+function updP(){
+  let tot=0,nd=0,gd=0,dd=0;
+  CATS.forEach(cat=>{const cs=S[cat.id];const all=[...cat.weapons,...(cs.extra||[])];tot+=all.length;all.forEach(w=>{if(cs.next[w])nd++;if(cs.gold[w])gd++;if(cs.diamond[w])dd++;});});
+  const np=tot?Math.round(nd/tot*100):0,gp=tot?Math.round(gd/tot*100):0,dp=tot?Math.round(dd/tot*100):0;
+  document.getElementById('next-nums').textContent=`${nd}/${tot} — ${np}%`;
+  document.getElementById('gold-nums').textContent=`${gd}/${tot} — ${gp}%`;
+  document.getElementById('diam-nums').textContent=`${dd}/${tot} — ${dp}%`;
   document.getElementById('next-bar').style.width=np+'%';
   document.getElementById('gold-bar').style.width=gp+'%';
   document.getElementById('diam-bar').style.width=dp+'%';
 }
-
-function getAllWeaponNames(){
-  const names=new Set();
-  CATEGORIES_DEFAULT.forEach(cat=>{
-    cat.weapons.forEach(w=>names.add(w.toLowerCase()));
-    (state[cat.id].extra||[]).forEach(w=>names.add(w.toLowerCase()));
-  });
-  return names;
-}
-
-// ── BUILD CATEGORIES ──────────────────────────────────────────────────────────
-function buildAll(){
-  const c=document.getElementById('categories'); c.innerHTML='';
-  CATEGORIES_DEFAULT.forEach(cat=>renderCategory(cat,c));
-  updateProgress(); renderUpNext();
-}
-
-function refreshAllCategories(){ CATEGORIES_DEFAULT.forEach(cat=>refreshCategory(cat)); }
-
-function renderCategory(cat, container){
-  const cs=state[cat.id];
+function awNames(){const s=new Set();CATS.forEach(cat=>{cat.weapons.forEach(w=>s.add(w.toLowerCase()));(S[cat.id].extra||[]).forEach(w=>s.add(w.toLowerCase()));});return s;}
+function buildAll(){const c=document.getElementById('categories');c.innerHTML='';CATS.forEach(cat=>rCat(cat,c));updP();rUN();}
+function rAll(){CATS.forEach(cat=>rCat(cat));}
+function rCat(cat,container){
+  const cs=S[cat.id];
   const all=[...cat.weapons,...(cs.extra||[])].sort((a,b)=>a.localeCompare(b));
-  const nDone=all.filter(w=>cs.next[w]).length;
-  const gDone=all.filter(w=>cs.gold[w]).length;
-  const dDone=all.filter(w=>cs.diamond[w]).length;
-  const allG=all.length>0&&gDone===all.length;
-
-  const div=document.createElement('div'); div.className='category'; div.id='cat-'+cat.id;
-  const header=document.createElement('div'); header.className='cat-header'+(cs.open?' open':'');
-
-  // Gold bulk
-  const gGroup=document.createElement('div'); gGroup.className='cat-cb-group';
-  const gLbl=document.createElement('div'); gLbl.className='cat-cb-label gold-label'; gLbl.textContent='GOLD';
-  const gCB=document.createElement('div'); gCB.className='cat-check'+(allG?' checked':''); gCB.innerHTML=CHECK_SVG;
-  gCB.addEventListener('click',e=>{
-    e.stopPropagation(); if(allG) return;
-    all.forEach(w=>{cs.gold[w]=true;cs.next[w]=false;});
-    saveState(state); refreshCategory(cat); updateProgress(); checkQueueCompletion();
-  });
-  gGroup.appendChild(gLbl); gGroup.appendChild(gCB);
-
-  // Diamond label
-  const dGroup=document.createElement('div'); dGroup.className='cat-cb-group';
-  const dLbl=document.createElement('div'); dLbl.className='cat-cb-label diam-label'; dLbl.innerHTML=`<div class="diam-label-icon"></div>`;
-  const dPh=document.createElement('div'); dPh.className='cat-check-placeholder';
-  dGroup.appendChild(dLbl); dGroup.appendChild(dPh);
-
-  // Next label
-  const nGroup=document.createElement('div'); nGroup.className='cat-cb-group';
-  const nLbl=document.createElement('div'); nLbl.className='cat-cb-label next-label'; nLbl.textContent='NEXT';
-  const nPh=document.createElement('div'); nPh.className='cat-check-placeholder';
-  nGroup.appendChild(nLbl); nGroup.appendChild(nPh);
-
-  const sep=document.createElement('div'); sep.className='cat-divider';
-  const catName=document.createElement('div'); catName.className='cat-name'; catName.textContent=cat.name;
-  const counts=document.createElement('div'); counts.className='cat-counts';
-  counts.innerHTML=`<span class="nc">🔶${nDone}/${all.length}</span><span class="gc">🥇${gDone}/${all.length}</span><span class="dc">💎${dDone}/${all.length}</span>`;
-  const chevron=document.createElement('span'); chevron.className='chevron'; chevron.textContent='▼';
-
-  header.appendChild(gGroup); header.appendChild(dGroup); header.appendChild(nGroup);
-  header.appendChild(sep); header.appendChild(catName); header.appendChild(counts); header.appendChild(chevron);
-  header.addEventListener('click',()=>{ cs.open=!cs.open; saveState(state); header.classList.toggle('open',cs.open); body.classList.toggle('open',cs.open); });
-
-  const body=document.createElement('div'); body.className='cat-body'+(cs.open?' open':'');
-  all.forEach(w=>body.appendChild(buildWeaponRow(cat,w)));
-
-  // add row
-  const addRow=document.createElement('div'); addRow.className='add-row';
-  const addInput=document.createElement('input'); addInput.className='add-input'; addInput.placeholder='Add weapon…'; addInput.maxLength=40;
-  const addBtn=document.createElement('button'); addBtn.className='add-btn'; addBtn.textContent='+ ADD';
-  const feedback=document.createElement('div'); feedback.className='add-feedback';
-  function showFeedback(msg,type){ feedback.textContent=msg; feedback.className='add-feedback '+type; if(type!=='syncing') setTimeout(()=>{feedback.className='add-feedback';},3000); }
-  addBtn.addEventListener('click',async()=>{
-    const name=addInput.value.trim(); if(!name) return;
-    if(getAllWeaponNames().has(name.toLowerCase())){ showFeedback('⚠ Already in list!','error'); return; }
-    cs.extra.push(name); saveState(state); addInput.value=''; refreshCategory(cat); updateProgress();
-    if(editorMode&&settings.token&&settings.repo&&settings.filepath){
-      showFeedback('⏳ Syncing to GitHub…','syncing');
-      try{ await commitToGitHub(document.documentElement.outerHTML); showFeedback('✓ Synced!','success'); }
-      catch(err){ showFeedback('✗ Sync failed: '+err.message,'error'); }
-    }
-  });
-  addInput.addEventListener('keydown',e=>{ if(e.key==='Enter') addBtn.click(); });
-  addRow.appendChild(addInput); addRow.appendChild(addBtn); body.appendChild(addRow); body.appendChild(feedback);
-  div.appendChild(header); div.appendChild(body); container.appendChild(div);
+  const nd=all.filter(w=>cs.next[w]).length,gd=all.filter(w=>cs.gold[w]).length,dd=all.filter(w=>cs.diamond[w]).length;
+  const allG=all.length>0&&gd===all.length;
+  const div=document.createElement('div');div.className='category';div.id='cat-'+cat.id;
+  const hdr=document.createElement('div');hdr.className='cat-hdr'+(cs.open?' open':'');
+  const gGrp=document.createElement('div');gGrp.className='ccg';
+  const gLbl=document.createElement('div');gLbl.className='ccl g';gLbl.textContent='GOLD';
+  const gCK=document.createElement('div');gCK.className='cck'+(allG?' checked':'');gCK.innerHTML=CSV;
+  gCK.onclick=e=>{e.stopPropagation();if(allG)return;all.forEach(w=>{cs.gold[w]=true;cs.next[w]=false;});ss();rCat(cat);updP();chkQ();};
+  gGrp.appendChild(gLbl);gGrp.appendChild(gCK);
+  const dGrp=document.createElement('div');dGrp.className='ccg';
+  const dLbl=document.createElement('div');dLbl.className='ccl d';dLbl.innerHTML=`<div class="dli"></div>`;
+  const dPh=document.createElement('div');dPh.className='cph';
+  dGrp.appendChild(dLbl);dGrp.appendChild(dPh);
+  const nGrp=document.createElement('div');nGrp.className='ccg';
+  const nLbl=document.createElement('div');nLbl.className='ccl n';nLbl.textContent='NEXT';
+  const nPh=document.createElement('div');nPh.className='cph';
+  nGrp.appendChild(nLbl);nGrp.appendChild(nPh);
+  const sep=document.createElement('div');sep.className='cdv';
+  const nm=document.createElement('div');nm.className='cat-name';nm.textContent=cat.name;
+  const cnt=document.createElement('div');cnt.className='cat-cnt';cnt.innerHTML=`<span class="nc">🔶${nd}/${all.length}</span><span class="gc">🥇${gd}/${all.length}</span><span class="dc">💎${dd}/${all.length}</span>`;
+  const chv=document.createElement('span');chv.className='chev';chv.textContent='▼';
+  hdr.appendChild(gGrp);hdr.appendChild(dGrp);hdr.appendChild(nGrp);hdr.appendChild(sep);hdr.appendChild(nm);hdr.appendChild(cnt);hdr.appendChild(chv);
+  hdr.onclick=()=>{cs.open=!cs.open;ss();hdr.classList.toggle('open',cs.open);body.classList.toggle('open',cs.open);};
+  const body=document.createElement('div');body.className='cat-body'+(cs.open?' open':'');
+  all.forEach(w=>body.appendChild(mkWRow(cat,w)));
+  const ar=document.createElement('div');ar.className='add-row';
+  const inp=document.createElement('input');inp.className='add-inp';inp.placeholder='Add weapon…';inp.maxLength=40;
+  const ab=document.createElement('button');ab.className='add-btn';ab.textContent='+ ADD';
+  const fb=document.createElement('div');fb.className='afb';
+  function setFb(msg,t){fb.textContent=msg;fb.className='afb '+t;if(t!=='syn')setTimeout(()=>{fb.className='afb';},3000);}
+  ab.onclick=async()=>{
+    const n=inp.value.trim();if(!n)return;
+    if(awNames().has(n.toLowerCase())){setFb('⚠ Already in list!','err');return;}
+    cs.extra.push(n);ss();inp.value='';rCat(cat);updP();
+    if(EM&&ST.token&&ST.repo&&ST.fp){setFb('⏳ Syncing…','syn');try{await ghCommit(document.documentElement.outerHTML);setFb('✓ Synced!','ok');}catch(e){setFb('✗ '+e.message,'err');}}
+  };
+  inp.onkeydown=e=>{if(e.key==='Enter')ab.click();};
+  ar.appendChild(inp);ar.appendChild(ab);body.appendChild(ar);body.appendChild(fb);
+  if(container){div.appendChild(hdr);div.appendChild(body);container.appendChild(div);}
+  else{
+    const old=document.getElementById('cat-'+cat.id);
+    if(old){div.appendChild(hdr);div.appendChild(body);old.replaceWith(div);}
+  }
 }
-
-function buildWeaponRow(cat,wName){
-  const cs=state[cat.id];
-  const isN=!!cs.next[wName], isG=!!cs.gold[wName], isD=!!cs.diamond[wName];
-  const inQueue = queue.primary.some(i=>i.name===wName)||queue.secondary.some(i=>i.name===wName);
-
-  const row=document.createElement('div');
-  row.className='weapon-row'+(isN?' next-done':'')+(isG?' gold-done':'')+(isD?' diam-done':'');
-
-  // Gold CB
-  const gCB=document.createElement('div'); gCB.className='weapon-check gold-cb'+(isG?' checked':''); gCB.innerHTML=CHECK_SVG;
-  gCB.addEventListener('click',()=>{
-    const v=!cs.gold[wName]; cs.gold[wName]=v;
-    if(v) cs.next[wName]=false;
-    saveState(state); refreshCategory(cat); updateProgress(); checkQueueCompletion();
-  });
-
-  const s1=document.createElement('div'); s1.className='check-sep';
-
-  // Diamond CB
-  const dCB=document.createElement('div'); dCB.className='weapon-check diam-cb'+(isD?' checked':''); dCB.innerHTML=`<div class="w-diam-icon"></div>`;
-  dCB.addEventListener('click',()=>{ cs.diamond[wName]=!cs.diamond[wName]; saveState(state); refreshCategory(cat); updateProgress(); checkQueueCompletion(); });
-
-  const s2=document.createElement('div'); s2.className='check-sep';
-
-  // Next CB
-  const nCB=document.createElement('div'); nCB.className='weapon-check next-cb'+(isN?' checked':'');
-  nCB.innerHTML=CHECK_SVG;
-  nCB.addEventListener('click',()=>{
-    if(isN){
-      // unchecking — remove from queue if present
-      if(inQueue){ removeFromQueue(wName, queue.primary.some(i=>i.name===wName)?'primary':'secondary'); }
-      cs.next[wName]=false; saveState(state); refreshCategory(cat); updateProgress();
-    } else {
-      cs.next[wName]=true; saveState(state);
-      addToQueue(wName, cat.id);
-      refreshCategory(cat); updateProgress();
-    }
-  });
-
-  const name=document.createElement('div'); name.className='weapon-name'; name.textContent=wName;
-
-  const rmBtn=document.createElement('button'); rmBtn.className='remove-btn'; rmBtn.textContent='✕';
-  rmBtn.addEventListener('click',()=>{
-    showModal('Remove Weapon',`Remove "${wName}" from ${cat.name}?${editorMode?' This will commit to GitHub.':''}`,[
-      {label:'Remove',cls:'confirm',action:async()=>{
-        cs.extra=cs.extra.filter(x=>x!==wName);
-        if(inQueue){ removeFromQueue(wName,queue.primary.some(i=>i.name===wName)?'primary':'secondary'); }
-        delete cs.next[wName]; delete cs.gold[wName]; delete cs.diamond[wName];
-        saveState(state); refreshCategory(cat); updateProgress();
-        if(editorMode&&settings.token&&settings.repo&&settings.filepath){
-          showToast('⏳ Syncing…','var(--editor-color)');
-          try{ await commitToGitHub(document.documentElement.outerHTML); showToast('✓ Synced to GitHub!'); }
-          catch(err){ showToast('✗ Sync failed','var(--red)'); }
-        }
-      }},
-      {label:'Cancel',cls:'cancel'}
-    ]);
-  });
-
-  row.appendChild(gCB); row.appendChild(s1); row.appendChild(dCB); row.appendChild(s2); row.appendChild(nCB); row.appendChild(name); row.appendChild(rmBtn);
+function mkWRow(cat,wName){
+  const cs=S[cat.id];
+  const isN=!!cs.next[wName],isG=!!cs.gold[wName],isD=!!cs.diamond[wName];
+  const inQ=Q.primary.some(i=>i.name===wName)||Q.secondary.some(i=>i.name===wName);
+  const row=document.createElement('div');row.className='wrow'+(isN?' nd':'')+(isG?' gd':'')+(isD?' dd':'');
+  const gCK=document.createElement('div');gCK.className='wck go'+(isG?' checked':'');gCK.innerHTML=CSV;
+  gCK.onclick=()=>{const v=!cs.gold[wName];cs.gold[wName]=v;if(v)cs.next[wName]=false;ss();rCat(cat);updP();chkQ();};
+  const s1=document.createElement('div');s1.className='wsep';
+  const dCK=document.createElement('div');dCK.className='wck di'+(isD?' checked':'');dCK.innerHTML=`<div class="wdi"></div>`;
+  dCK.onclick=()=>{cs.diamond[wName]=!cs.diamond[wName];ss();rCat(cat);updP();chkQ();};
+  const s2=document.createElement('div');s2.className='wsep';
+  const nCK=document.createElement('div');nCK.className='wck nx'+(isN?' checked':'');nCK.innerHTML=CSV;
+  nCK.onclick=()=>{
+    if(isN){if(inQ){const sl=Q.primary.some(i=>i.name===wName)?'primary':'secondary';rmQ(wName,sl);}cs.next[wName]=false;ss();rCat(cat);updP();}
+    else{cs.next[wName]=true;ss();addQ(wName,cat.id);rCat(cat);updP();}
+  };
+  const nm=document.createElement('div');nm.className='wname';nm.textContent=wName;
+  const rm=document.createElement('button');rm.className='wrm';rm.textContent='✕';
+  rm.onclick=()=>modal('Remove Weapon',`Remove "${wName}" from ${cat.name}?${EM?' Will commit to GitHub.':''}`,[
+    {l:'Remove',c:'c',a:async()=>{
+      cs.extra=cs.extra.filter(x=>x!==wName);
+      if(inQ){const sl=Q.primary.some(i=>i.name===wName)?'primary':'secondary';rmQ(wName,sl);}
+      delete cs.next[wName];delete cs.gold[wName];delete cs.diamond[wName];ss();rCat(cat);updP();
+      if(EM&&ST.token&&ST.repo&&ST.fp){toast('⏳ Syncing…','var(--ec)');try{await ghCommit(document.documentElement.outerHTML);toast('✓ Synced!');}catch(){toast('✗ Sync failed','var(--red)');}}
+    }},{l:'Cancel',c:'x'}]);
+  row.appendChild(gCK);row.appendChild(s1);row.appendChild(dCK);row.appendChild(s2);row.appendChild(nCK);row.appendChild(nm);row.appendChild(rm);
   return row;
 }
-
-function refreshCategory(cat){
-  const old=document.getElementById('cat-'+cat.id);
-  if(old){ const tmp=document.createElement('div'); renderCategory(cat,tmp); old.replaceWith(tmp.firstChild); }
-}
-
-// ── DOWNLOAD / BOOKMARK ───────────────────────────────────────────────────────
-document.getElementById('downloadBtn').addEventListener('click',e=>{
-  e.preventDefault();
-  const blob=new Blob([document.documentElement.outerHTML],{type:'text/html'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a'); a.href=url; a.download='cod_gold_checklist.html';
-  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
-});
-document.getElementById('bookmarkBtn').addEventListener('click',()=>{
-  if(navigator.share){ navigator.share({title:'COD Mobile Gold & Diamond',url:window.location.href}).catch(()=>{}); }
-  else{ showToast('📌 Tap ⋮ → Add to Home Screen'); }
-});
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-buildAll();
-updateApiStatus();
+document.getElementById('dlBtn').onclick=e=>{e.preventDefault();const b=new Blob([document.documentElement.outerHTML],{type:'text/html'});const u=URL.createObjectURL(b);const a=document.createElement('a');a.href=u;a.download='cod_gold_checklist.html';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);};
+document.getElementById('bkBtn').onclick=()=>{if(navigator.share){navigator.share({title:'COD Mobile',url:window.location.href}).catch(()=>{});}else{toast('📌 Tap ⋮ → Add to Home Screen');}};
+buildAll();updAS();
 </script>
 </body>
 </html>
