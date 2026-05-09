@@ -426,9 +426,10 @@ function updP(){
   document.getElementById('diam-bar').style.width=dp+'%';
 }
 function awNames(){const s=new Set();CATS.forEach(cat=>{cat.weapons.forEach(w=>s.add(w.toLowerCase()));(S[cat.id].extra||[]).forEach(w=>s.add(w.toLowerCase()));});return s;}
-function buildAll(){const c=document.getElementById('categories');c.innerHTML='';CATS.forEach(cat=>rCat(cat,c));updP();rUN();}
+function buildAll(){const c=document.getElementById('categories');c.innerHTML='';CATS.forEach(cat=>{c.appendChild(buildCatEl(cat));});updP();rUN();}
 function rAll(){CATS.forEach(cat=>rCat(cat));}
-function rCat(cat,container){
+function rCat(cat){const old=document.getElementById('cat-'+cat.id);if(old)old.replaceWith(buildCatEl(cat));}
+function buildCatEl(cat){
   const cs=S[cat.id];
   const all=[...cat.weapons,...(cs.extra||[])].sort((a,b)=>a.localeCompare(b));
   const nd=all.filter(w=>cs.next[w]).length,gd=all.filter(w=>cs.gold[w]).length,dd=all.filter(w=>cs.diamond[w]).length;
@@ -469,11 +470,8 @@ function rCat(cat,container){
   };
   inp.onkeydown=e=>{if(e.key==='Enter')ab.click();};
   ar.appendChild(inp);ar.appendChild(ab);body.appendChild(ar);body.appendChild(fb);
-  if(container){div.appendChild(hdr);div.appendChild(body);container.appendChild(div);}
-  else{
-    const old=document.getElementById('cat-'+cat.id);
-    if(old){div.appendChild(hdr);div.appendChild(body);old.replaceWith(div);}
-  }
+  div.appendChild(hdr);div.appendChild(body);
+  return div;
 }
 function mkWRow(cat,wName){
   const cs=S[cat.id];
@@ -498,7 +496,7 @@ function mkWRow(cat,wName){
       cs.extra=cs.extra.filter(x=>x!==wName);
       if(inQ){const sl=Q.primary.some(i=>i.name===wName)?'primary':'secondary';rmQ(wName,sl);}
       delete cs.next[wName];delete cs.gold[wName];delete cs.diamond[wName];ss();rCat(cat);updP();
-      if(EM&&ST.token&&ST.repo&&ST.fp){toast('⏳ Syncing…','var(--ec)');try{await ghCommit(document.documentElement.outerHTML);toast('✓ Synced!');}catch(){toast('✗ Sync failed','var(--red)');}}
+      if(EM&&ST.token&&ST.repo&&ST.fp){toast('⏳ Syncing…','var(--ec)');try{await ghCommit(document.documentElement.outerHTML);toast('✓ Synced!');}catch(_){toast('✗ Sync failed','var(--red)');}}
     }},{l:'Cancel',c:'x'}]);
   row.appendChild(gCK);row.appendChild(s1);row.appendChild(dCK);row.appendChild(s2);row.appendChild(nCK);row.appendChild(nm);row.appendChild(rm);
   return row;
